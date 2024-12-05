@@ -18,6 +18,7 @@ jobs:
 
   build_2:
     name: "Build Stage 2 for ${{ inputs.environment }}"
+    needs: build_1
     environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:

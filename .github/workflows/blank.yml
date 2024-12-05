@@ -26,3 +26,10 @@ jobs:
     with:
       environment: ${{ matrix.environment }}
     secrets: inherit
+    
+  another_job:
+    name: "Another Job"
+
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo Something Else'

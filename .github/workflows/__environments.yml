@@ -31,6 +31,7 @@ jobs:
             EOJSON
           )
 
+          set +e
           envjson="$(jq -e --arg env '${{ inputs.group }}' '.[$env]?' <<< "$envs")"
           if [[ $? -eq 1 ]]; then
             echo "::Error::Unknown environment group."

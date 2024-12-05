@@ -24,7 +24,7 @@ jobs:
         run: echo "Publish here"
 
   deploy:
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/_appservice-deploy-workflow.yml
     with:
-      group: ""
+      environment-group: ea
 

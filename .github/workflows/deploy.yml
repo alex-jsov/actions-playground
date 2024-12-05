@@ -3,7 +3,7 @@ name: Deploy Environments
 on:
   workflow_call:
     inputs:
-      group: # the variable you can use in place of a matrix
+      group:
         required: true
         type: string
         default: ""

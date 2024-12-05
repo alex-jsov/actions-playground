@@ -1,0 +1,33 @@
+name: Prepare Environments
+
+on:
+  workflow_call:
+    inputs:
+      group:
+        required: true
+        type: string
+      
+jobs:
+  prepare_envs:
+    name: "Prepare ${{ inputs.group }} Environments"
+    runs-on: ubuntu-latest
+    
+    outputs:
+      envs: ${{ steps.set-matrix.outputs.envs }}
+
+    steps:
+      - id: set-matrix
+        shell: bash
+        run: |
+          case "${{ inputs.group }}" in
+            "")
+              envs=(dev test prod);;
+            "ea")
+              envs=(eadev eatest eaprod);;
+            *)
+              echo 'Unknown environment group.'
+              exit 1;
+          esac
+
+          envjson=jq -nc '$ARGS.positional' --args ${envs[@]}
+          echo "envs=$envjson" >> $GITHUB_OUTPUT

@@ -24,5 +24,5 @@ jobs:
               envs=(eadev eatest eaprod)
           esac
 
-          envjson=jq -nc '{environment: $ARGS.positional}' --args ${envs[@]}
+          envjson="$(jq -nc '{environment: $ARGS.positional}' --args ${envs[@]})"
           echo "envs=$envjson" >> $GITHUB_OUTPUT

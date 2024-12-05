@@ -29,5 +29,5 @@ jobs:
               exit 1;
           esac
 
-          envjson=jq -nc '$ARGS.positional' --args ${envs[@]}
+          envjson="$(jq -nc '$ARGS.positional' --args ${envs[@]})"
           echo "envs=$envjson" >> $GITHUB_OUTPUT

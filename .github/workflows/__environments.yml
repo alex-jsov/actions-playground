@@ -23,17 +23,19 @@ jobs:
       - id: set-matrix
         shell: bash
         run: |
-          case "${{ inputs.group }}" in
-            "")
-              envs=(dev test prod);;
-            "ea")
-              envs=(eadev eatest eaprod);;
-            *)
-              echo 'Unknown environment group.'
-              exit 1;
-          esac
+          envs=$(cat <<-EOJSON
+            {
+              "":   ["dev", "test", "prod"]
+              "ea": ["eadev", "eatest", "eaprod"]
+            }
+            EOJSON
+          )
 
-          envjson="$(jq -nc '$ARGS.positional' --args ${envs[@]})"
+          envjson="$(jq -e --arg env '${{ inputs.group }}' '.[$env]?' <<< "$envs")"
+          if [[ $? -eq 1 ]]; then
+            echo "::Error::Unknown environment group."
+            exit 1
+          fi
 
           echo "Environments for group: $envjson"
           echo "envs=$envjson" >> "$GITHUB_OUTPUT"

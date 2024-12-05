@@ -1,0 +1,28 @@
+name: Deploy Environments
+
+on:
+  workflow_call:
+    inputs:
+      group: # the variable you can use in place of a matrix
+        required: true
+        type: string
+        default: ""
+      
+jobs:
+  prepare_envs:
+    uses: ./.github/workflows/environments.yml
+    with:
+      group: ${{ inputs.group }}
+
+  deploy:
+    needs: prepare_envs
+    strategy:
+      matrix: ${{ fromJSON(needs.prepare_envs.outputs.envs) }}
+
+    name: "Deploy ${{ matrix.environment }}"
+    environment: ${{ matrix.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to App Service
+        run: echo ${{ vars.env_message }}!
+    

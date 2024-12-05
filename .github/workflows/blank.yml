@@ -26,6 +26,7 @@ jobs:
 
   deploy:
     uses: ./.github/workflows/_appservice-deploy-workflow.yml
+    name: Deploy App Services
     needs: publish_acr
     with:
       environment-group: ea

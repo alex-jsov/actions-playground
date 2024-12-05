@@ -30,4 +30,5 @@ jobs:
           esac
 
           envjson="$(jq -nc '$ARGS.positional' --args ${envs[@]})"
+          echo "Environments for group: $envjson"
           echo "envs=$envjson" >> $GITHUB_OUTPUT

@@ -20,6 +20,8 @@ jobs:
       matrix: 
         environment: [ dev, test, prod ]
 
+    name: "Master ${{ matrix.environment }}"
+
     uses: ./.github/workflows/build.yml
     with:
       environment: ${{ matrix.environment }}

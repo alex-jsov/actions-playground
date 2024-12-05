@@ -1,0 +1,23 @@
+name: Build Environment
+
+on:
+  workflow_call:
+    inputs:
+      environment: # the variable you can use in place of a matrix
+        required: true
+        type: string
+
+jobs:
+  build_1:  
+    environment: ${{ matrix.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Job 1
+        run: echo ${{ vars.env_message }}!
+
+  build_2:  
+    environment: ${{ matrix.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Job 2
+        run: echo ${{ vars.env_message }}!

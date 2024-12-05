@@ -32,7 +32,7 @@ jobs:
           )"
 
           envjson="$(jq --arg env '${{ inputs.group }}' '.[$env]?' <<< "$envs")"
-          if [[ $envjson == 'null' -eq 1 ]]; then
+          if [[ $envjson == 'null' ]]; then
             echo "::Error::Unknown environment group."
             exit 1
           fi

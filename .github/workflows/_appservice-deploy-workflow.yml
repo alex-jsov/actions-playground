@@ -1,3 +1,5 @@
+name: Deploy App Services
+
 on:
   workflow_call:
     inputs:

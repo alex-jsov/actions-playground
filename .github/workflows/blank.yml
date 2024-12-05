@@ -29,5 +29,5 @@ jobs:
     uses: ./.github/workflows/_appservice-deploy-workflow.yml
     #needs: publish_acr
     with:
-      environment-group: ea
+      environment-group: ""
 

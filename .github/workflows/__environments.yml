@@ -6,6 +6,8 @@ on:
       group:
         required: true
         type: string
+    outputs:
+      envs: ${{ jobs.prepare_envs.outputs.envs }}
       
 jobs:
   prepare_envs:
@@ -30,6 +32,6 @@ jobs:
           esac
 
           envjson="$(jq -nc '$ARGS.positional' --args ${envs[@]})"
-          
+
           echo "Environments for group: $envjson"
           echo "envs=$envjson" >> "$GITHUB_OUTPUT"

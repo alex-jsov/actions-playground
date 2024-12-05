@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare
     steps:
-      - run: echo "${{ toJson(needs.prepare.outputs) }}"
+      - run: echo "${{ toJson(needs) }}"
 
   deploy:
     needs: prepare

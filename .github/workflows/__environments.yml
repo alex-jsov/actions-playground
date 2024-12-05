@@ -23,13 +23,13 @@ jobs:
       - id: set-matrix
         shell: bash
         run: |
-          envs=(cat <<EOF
+          envs="$(cat <<EOF
           {
             "":   ["dev", "test", "prod"]
             "ea": ["eadev", "eatest", "eaprod"]
           }
           EOF
-          )
+          )"
 
           envjson="$(jq --arg env '${{ inputs.group }}' '.[$env]?' <<< "$envs")"
           if [[ $envjson == 'null' -eq 1 ]]; then

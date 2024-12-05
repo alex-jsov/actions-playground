@@ -27,8 +27,7 @@ jobs:
   build_all:
     needs: prepare_envs
     strategy:
-      matrix: 
-        environment: ${{ fromJSON(needs.prepare_envs.outputs.envs) }}
+      matrix: ${{ fromJSON(needs.prepare_envs.outputs.envs) }}
 
     name: "Master ${{ matrix.environment }}"
 
@@ -36,10 +35,3 @@ jobs:
     with:
       environment: ${{ matrix.environment }}
     secrets: inherit
-    
-  another_job:
-    name: "Another Job"
-
-    runs-on: ubuntu-latest
-    steps:
-      - run: 'echo Something Else'

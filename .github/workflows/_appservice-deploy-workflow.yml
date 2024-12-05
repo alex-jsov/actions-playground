@@ -12,6 +12,7 @@ on:
 jobs:
   prepare:
     uses: ./.github/workflows/__environments.yml
+    name: "Prepare ${{ inputs.environment-group }} Environments"
     with:
       group: ${{ inputs.environment-group }}
 

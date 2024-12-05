@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     
     outputs:
-      envs: ${{ steps.set-matrix.outputs.envs }}
+      envs: ${{ steps.get-envs.outputs.envs }}
 
     steps:
-      - id: set-matrix
+      - id: get-envs
         shell: bash
         run: |
           envs="$(cat <<EOF

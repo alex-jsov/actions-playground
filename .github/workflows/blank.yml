@@ -15,10 +15,20 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  prepare_envs:
+    name: "Prepare Environments"
+    runs-on: ubuntu-latest
+    outputs:
+      envs: ${{ steps.set-matrix.outputs.envs }}
+    steps:
+      - id: set-matrix
+        run: echo "::set-output name=envs::{\"environment\":[dev, test, prod]}"
+    
   build_all:
+    needs: prepare_envs
     strategy:
       matrix: 
-        environment: [ dev, test, prod ]
+        environment: ${{ fromJSON(needs.prepare_envs.outputs.envs) }}
 
     name: "Master ${{ matrix.environment }}"
 
